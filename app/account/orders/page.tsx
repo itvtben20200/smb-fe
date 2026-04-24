@@ -27,6 +27,9 @@ const statusColor: Record<string, string> = {
   REFUNDED: 'bg-gray-100 text-gray-600',
 };
 
+const STATUS_LABEL: Record<string, string> = { DELIVERED: 'COMPLETED' };
+const getLabel = (s: string) => STATUS_LABEL[s] ?? s;
+
 function downloadReceipt(order: Order) {
   import('jspdf').then(({ jsPDF }) => {
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -152,7 +155,7 @@ export default function OrdersPage() {
                   </div>
                   <div className="flex items-center gap-3 flex-shrink-0">
                     <span className={`text-xs px-2.5 py-1 rounded-full font-medium hidden sm:inline-block ${statusColor[order.status] ?? 'bg-gray-100'}`}>
-                      {order.status}
+                      {getLabel(order.status)}
                     </span>
                     <p className="font-bold text-sm">€{Number(order.total).toFixed(2)}</p>
                     <svg className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +168,7 @@ export default function OrdersPage() {
                   <div className="border-t px-5 py-4 bg-gray-50 space-y-4">
                     <div className="flex items-center gap-2">
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${statusColor[order.status] ?? 'bg-gray-100'}`}>
-                        {order.status}
+                        {getLabel(order.status)}
                       </span>
                       <span className="text-xs text-gray-400">
                         Placed on {new Date(order.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}

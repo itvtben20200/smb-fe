@@ -24,7 +24,12 @@ export function LoginForm() {
   const onSubmit = async (data: FormData) => {
     try {
       await login(data.email, data.password);
-      router.push('/');
+      const { user } = useAuthStore.getState();
+      if (user?.role === 'ADMIN' || user?.role === 'SUPERADMIN') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/');
+      }
     } catch {
       setError('root', { message: 'Invalid email or password' });
     }

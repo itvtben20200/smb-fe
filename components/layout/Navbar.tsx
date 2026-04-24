@@ -12,15 +12,19 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link href="/" className="font-bold text-lg">SMB Store</Link>
         <div className="flex items-center gap-6 text-sm">
-          <Link href="/">Shop</Link>
-          <Link href="/cart" className="relative">
-            Cart
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-3 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+          {!(user?.role === 'ADMIN' || user?.role === 'SUPERADMIN') && (
+            <>
+              <Link href="/">Shop</Link>
+              <Link href="/cart" className="relative">
+                Cart
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-3 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </>
+          )}
           {user ? (
             <>
               {(user.role === 'ADMIN' || user.role === 'SUPERADMIN') && (

@@ -6,6 +6,7 @@ import Link from 'next/link';
 interface Stats {
   totalOrders: number;
   totalRevenue: number;
+  refundedAmount: number;
   newCustomers: number;
   recentOrders: { id: string; total: number; status: string; createdAt: string; user?: { email: string } }[];
 }
@@ -23,14 +24,20 @@ export default function AdminDashboardPage() {
     <div>
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="bg-white border rounded-lg p-4">
           <p className="text-sm text-gray-500">Total Orders</p>
           <p className="text-3xl font-bold">{stats.totalOrders}</p>
         </div>
         <div className="bg-white border rounded-lg p-4">
-          <p className="text-sm text-gray-500">Total Revenue</p>
+          <p className="text-sm text-gray-500">Net Revenue</p>
           <p className="text-3xl font-bold">€{Number(stats.totalRevenue).toFixed(2)}</p>
+          <p className="text-xs text-gray-400 mt-1">Excl. refunds</p>
+        </div>
+        <div className="bg-white border rounded-lg p-4">
+          <p className="text-sm text-gray-500">Refunded</p>
+          <p className="text-3xl font-bold text-red-500">€{Number(stats.refundedAmount ?? 0).toFixed(2)}</p>
+          <p className="text-xs text-gray-400 mt-1">Total refunded orders</p>
         </div>
         <div className="bg-white border rounded-lg p-4">
           <p className="text-sm text-gray-500">New Customers (30d)</p>
@@ -57,7 +64,9 @@ export default function AdminDashboardPage() {
                 <td className="p-3 font-mono">#{order.id.slice(-8).toUpperCase()}</td>
                 <td className="p-3">{order.user?.email || 'Guest'}</td>
                 <td className="p-3">
-                  <span className="px-2 py-1 bg-gray-100 rounded-full text-xs">{order.status}</span>
+                  <span className="px-2 py-1 bg-gray-100 rounded-full text-xs">
+                    {order.status === 'DELIVERED' ? 'COMPLETED' : order.status}
+                  </span>
                 </td>
                 <td className="p-3">€{Number(order.total).toFixed(2)}</td>
                 <td className="p-3">{new Date(order.createdAt).toLocaleDateString()}</td>

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -20,9 +21,30 @@ export function CheckoutForm({ stripePromise }: { stripePromise: Promise<unknown
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
     setError,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  useEffect(() => {
+    if (!user) return;
+    api.get('/auth/me').then((r) => {
+      reset({
+        name: r.data.name ?? '',
+        email: r.data.email ?? '',
+        phone: r.data.phone ?? '',
+        company: r.data.companyName ?? '',
+      });
+    }).catch(() => {
+      // Fallback to cached store values
+      reset({
+        name: user.name ?? '',
+        email: user.email ?? '',
+        phone: user.phone ?? '',
+        company: user.companyName ?? '',
+      });
+    });
+  }, [user, reset]);
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -61,7 +83,7 @@ export function CheckoutForm({ stripePromise }: { stripePromise: Promise<unknown
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Email{user ? '' : ' *'}</label>
-            <input {...register('email')} type="email" className="w-full border rounded px-3 py-2" defaultValue={user?.email ?? ''} />
+            <input {...register('email')} type="email" className="w-full border rounded px-3 py-2" />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
           </div>
           <div className="grid grid-cols-2 gap-3">

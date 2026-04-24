@@ -4,9 +4,14 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { useEffect } from 'react';
 
-const navItems = [
+const customerNavItems = [
   { href: '/account', label: 'Dashboard', icon: '🏠' },
   { href: '/account/orders', label: 'Order History', icon: '📦' },
+  { href: '/account/profile', label: 'My Profile', icon: '👤' },
+  { href: '/account/security', label: 'Password & Security', icon: '🔒' },
+];
+
+const adminNavItems = [
   { href: '/account/profile', label: 'My Profile', icon: '👤' },
   { href: '/account/security', label: 'Password & Security', icon: '🔒' },
 ];
@@ -21,6 +26,9 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   }, [user, router]);
 
   if (!user) return null;
+
+  const isAdmin = user.role === 'ADMIN' || user.role === 'SUPERADMIN';
+  const navItems = isAdmin ? adminNavItems : customerNavItems;
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
@@ -56,6 +64,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
                 </Link>
               );
             })}
+            {isAdmin && (
+              <Link
+                href="/admin/dashboard"
+                className="flex items-center gap-3 px-4 py-3 text-sm border-b text-blue-600 hover:bg-blue-50 transition-colors"
+              >
+                <span>⚙️</span> Admin Panel
+              </Link>
+            )}
             <button
               onClick={async () => { await logout(); router.push('/'); }}
               className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors"

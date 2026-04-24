@@ -7,6 +7,8 @@ interface User {
   email: string;
   name: string | null;
   role: 'CUSTOMER' | 'ADMIN' | 'SUPERADMIN';
+  phone?: string | null;
+  companyName?: string | null;
 }
 
 interface AuthStore {
