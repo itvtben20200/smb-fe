@@ -63,7 +63,10 @@ export function ProductCard({ product }: { product: Product }) {
           <p className="text-xs text-gray-500 mb-3 line-clamp-2 flex-1">{product.description}</p>
         )}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-lg font-bold text-gray-900">€{price.toFixed(2)}</span>
+          <div className="flex items-baseline gap-1">
+            <span className="text-lg font-bold text-gray-900">€{price.toFixed(2)}</span>
+            <span className="text-xs text-gray-400 font-normal">/ per month</span>
+          </div>
           {product.stock <= 10 && product.stock > 0 && (
             <span className="text-xs text-orange-500 font-medium">Only {product.stock} left</span>
           )}
@@ -79,14 +82,14 @@ export function ProductCard({ product }: { product: Product }) {
             disabled={product.stock === 0}
             className="flex-1 border border-gray-900 text-gray-900 text-sm py-2 rounded-lg hover:bg-gray-50 transition disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Add to Cart
+            Get this Solution
           </button>
           <button
             onClick={handleBuyNow}
             disabled={product.stock === 0}
             className="flex-1 bg-gray-900 text-white text-sm py-2 rounded-lg hover:bg-gray-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Buy Now
+            Start with this Plan
           </button>
         </div>
       </div>
