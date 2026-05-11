@@ -57,12 +57,9 @@ export function CtaBanner() {
                   <option>Full Platform</option>
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 gap-3 pt-1">
                 <button type="submit" className="bg-[#0f2d59] text-white font-bold py-3 rounded-xl text-sm hover:bg-[#1a4d8a] transition-colors">
                   Book a Consultation
-                </button>
-                <button type="submit" className="bg-[#2563eb] text-white font-bold py-3 rounded-xl text-sm hover:bg-[#1d4ed8] transition-colors">
-                  Create Free Account
                 </button>
               </div>
               <p className="text-xs text-gray-400 text-center">By submitting, you agree to our <a href="#" className="underline">Privacy Policy</a>. No spam, ever.</p>
