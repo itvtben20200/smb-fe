@@ -4,11 +4,13 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get('accessToken')?.value;
-  const refreshToken = request.cookies.get('refreshToken')?.value;
   const userRole = request.cookies.get('userRole')?.value;
-  const hasSession = Boolean(accessToken || refreshToken);
+  // accessToken expires in 15 min; userRole is set for 7 days and cleared on logout.
+  // Both live on the frontend domain so middleware can always read them.
+  // (refreshToken is httpOnly on the backend domain and is not visible here.)
+  const hasSession = Boolean(accessToken || userRole);
 
-  // Protect /account routes — treat the refresh-token cookie as the real session source.
+  // Protect /account routes
   if (pathname.startsWith('/account') && !hasSession) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
