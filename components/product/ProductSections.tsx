@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { productExtras, type FeatureTier } from '@/lib/productContent';
+import { productExtras, type FeatureTier, type ProductExtra } from '@/lib/productContent';
 
 interface Props {
   slug: string;
@@ -42,7 +42,7 @@ export function ProductSections({ slug, features }: Props) {
 }
 
 // ── Section 3: Benefits Grid ────────────────────────────────────────────────
-function BenefitsGrid({ extra }: { extra: ReturnType<typeof productExtras[string]> }) {
+function BenefitsGrid({ extra }: { extra: ProductExtra }) {
   return (
     <section className="bg-white py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -94,7 +94,7 @@ function WhatsIncluded({
   extra,
   features,
 }: {
-  extra: ReturnType<typeof productExtras[string]>;
+  extra: ProductExtra;
   features: string[];
 }) {
   return (
@@ -161,7 +161,7 @@ function WhatsIncluded({
 }
 
 // ── Section 5: Who It's For ─────────────────────────────────────────────────
-function WhoItsFor({ extra }: { extra: ReturnType<typeof productExtras[string]> }) {
+function WhoItsFor({ extra }: { extra: ProductExtra }) {
   return (
     <section
       className="py-20 px-4"
@@ -206,7 +206,7 @@ function WhoItsFor({ extra }: { extra: ReturnType<typeof productExtras[string]> 
 }
 
 // ── Section 6: FAQ (accordion) ──────────────────────────────────────────────
-function ProductFAQ({ extra }: { extra: ReturnType<typeof productExtras[string]> }) {
+function ProductFAQ({ extra }: { extra: ProductExtra }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -274,7 +274,7 @@ function ProductFAQ({ extra }: { extra: ReturnType<typeof productExtras[string]>
 }
 
 // ── Section 7: Lead Gen Form ────────────────────────────────────────────────
-function LeadForm({ extra }: { extra: ReturnType<typeof productExtras[string]> }) {
+function LeadForm({ extra }: { extra: ProductExtra }) {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
 
