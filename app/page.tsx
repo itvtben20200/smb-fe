@@ -4,8 +4,6 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { HeroBanner } from '@/components/layout/HeroBanner';
 import { Testimonials } from '@/components/marketing/Testimonials';
 import { CtaBanner } from '@/components/marketing/CtaBanner';
-import { FooterSection } from '@/components/marketing/FooterSection';
-
 async function getProducts() {
   try {
     const res = await api.get('/products?limit=12');
@@ -47,7 +45,6 @@ export default async function HomePage() {
         <Testimonials />
       </div>
       <CtaBanner />
-      <FooterSection />
     </>
   );
 }

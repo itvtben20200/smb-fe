@@ -1,6 +1,7 @@
 'use client';
 import { useCartStore } from '@/store/cartStore';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface Product {
   id: string;
@@ -41,8 +42,8 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="border rounded-xl overflow-hidden bg-white hover:shadow-lg transition-shadow flex flex-col">
-      {/* Product image */}
-      <div className="relative h-52 bg-gray-100 overflow-hidden">
+      {/* Product image — links to product page */}
+      <Link href={`/products/${product.slug}`} className="relative h-52 bg-gray-100 overflow-hidden block">
         {product.images?.[0] ? (
           <img
             src={product.images[0]}
@@ -54,11 +55,13 @@ export function ProductCard({ product }: { product: Product }) {
             No image
           </div>
         )}
-      </div>
+      </Link>
 
       {/* Product info */}
       <div className="p-4 flex flex-col flex-1">
-        <h2 className="font-semibold text-gray-900 mb-1">{product.name}</h2>
+        <Link href={`/products/${product.slug}`} className="hover:underline">
+          <h2 className="font-semibold text-gray-900 mb-1">{product.name}</h2>
+        </Link>
         {product.description && (
           <p className="text-xs text-gray-500 mb-3 line-clamp-2 flex-1">{product.description}</p>
         )}

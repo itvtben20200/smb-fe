@@ -1,6 +1,7 @@
 
 "use client";
 import React from 'react';
+import Script from 'next/script';
 
 export function CtaBanner() {
   return (
@@ -26,44 +27,15 @@ export function CtaBanner() {
           <div className="bg-white rounded-2xl shadow-2xl p-8 text-gray-800">
             <h3 className="font-extrabold text-[#0f2d59] text-xl mb-1">Book a Consultation</h3>
             <p className="text-gray-500 text-sm mb-6">Or <a href="#" className="text-[#2563eb] font-semibold hover:underline">create a free account</a> and start immediately.</p>
-            <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1.5">First Name</label>
-                  <input type="text" placeholder="Maria" className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1.5">Last Name</label>
-                  <input type="text" placeholder="Kowalski" className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1.5">Work Email</label>
-                <input type="email" placeholder="maria@company.com" className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1.5">Company Name</label>
-                <input type="text" placeholder="TechFab GmbH" className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1.5">I'm interested in</label>
-                <select className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-                  <option>CRM for Manufacturing</option>
-                  <option>SMB Portal / Operations Hub</option>
-                  <option>Automation Tools</option>
-                  <option>Analytics &amp; Reporting</option>
-                  <option>Customer Service Lite</option>
-                  <option>Bookings Add-On</option>
-                  <option>Full Platform</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-1 gap-3 pt-1">
-                <button type="submit" className="bg-[#0f2d59] text-white font-bold py-3 rounded-xl text-sm hover:bg-[#1a4d8a] transition-colors">
-                  Book a Consultation
-                </button>
-              </div>
-              <p className="text-xs text-gray-400 text-center">By submitting, you agree to our <a href="#" className="underline">Privacy Policy</a>. No spam, ever.</p>
-            </form>
+            <div
+              data-form-id="34089e9d-366a-f111-a826-7c1e52833fc1"
+              data-form-api-url="https://public-eur.mkt.dynamics.com/api/v1.0/orgs/fcd37353-59db-4c57-a5fb-223d41e19fdd/landingpageforms"
+              data-cached-form-url="https://assets-eur.mkt.dynamics.com/fcd37353-59db-4c57-a5fb-223d41e19fdd/digitalassets/forms/34089e9d-366a-f111-a826-7c1e52833fc1"
+            ></div>
+            <Script
+              src="https://formui-usa1.mkt.dynamics.com/eur/FormLoader/FormLoader.bundle.js"
+              strategy="afterInteractive"
+            />
           </div>
         </div>
       </div>

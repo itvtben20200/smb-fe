@@ -3,6 +3,7 @@ import './globals.css';
 
 import { Navbar } from '@/components/layout/Navbar';
 import { ChatWidget } from '@/components/chat/ChatWidget';
+import { FooterSection } from '@/components/marketing/FooterSection';
 
 export const metadata: Metadata = {
   title: 'SMB Store',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Only wrap the main content in a container, not full-width sections */}
           {children}
         </main>
+        <FooterSection />
         <ChatWidget />
       </body>
     </html>
